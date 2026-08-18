@@ -1,0 +1,40 @@
+# Full example - every option with a short explanation.
+# Drop the lines you do not need; every option is optional.
+type: custom:dynamic-radiocard
+
+# --- General ---------------------------------------------------------------
+title: Living room music
+show_title: true
+show_labels: true
+language: auto          # auto | en | de  (auto follows the HA user profile)
+debug: false
+
+# --- Music Assistant connection --------------------------------------------
+ma_token: "eyJhbGciOi..."
+ma_port: 8095
+
+# --- Library ---------------------------------------------------------------
+# true  = only items marked as favorite
+# false = the category's whole library
+favorites_only:
+  radio: true
+  podcast: true
+  track: false
+  album: false
+  artist: false
+
+album_sort: newest      # newest | alpha
+
+# Custom display names per provider instance (ids: filter panel / debug: true)
+provider_names:
+  plex--36fRmfSE: Plex Audiobooks
+
+# --- Appearance ------------------------------------------------------------
+image_scale: 1.2        # 0.4 - 3.0
+grid_mode: true         # center click opens the grid view
+grid_max: 70
+smooth_animation: true  # false = hard transitions, smoother on old tablets
+
+# --- Players ---------------------------------------------------------------
+playback_controls: true
+hide_players: "unnamed" # regex on the display name

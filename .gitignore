@@ -1,0 +1,25 @@
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temp files
+*.tmp
+*.bak
+*.orig
+*~
+
+# Local archive of pre-repo files (kept out of the repo on purpose)
+_to_delete/
+
+# Local secrets / tokens - NEVER commit
+secrets.yaml
+.env
+*.token

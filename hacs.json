@@ -1,0 +1,6 @@
+{
+  "name": "Dynamic RadioCard",
+  "render_readme": true,
+  "filename": "dynamic-radiocard.js",
+  "homeassistant": "2024.4.0"
+}

@@ -1,0 +1,23 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Verify build is up to date
+        run: npm run check
+      - name: Publish release with card asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/dynamic-radiocard.js
+          generate_release_notes: true

@@ -1,0 +1,29 @@
+{
+  "name": "dynamic-radiocard",
+  "version": "3.0.0",
+  "description": "Dynamic RadioCard - a 3D cover-flow media browser card for Home Assistant + Music Assistant (radio, podcasts, tracks, albums, artists).",
+  "author": "Michael Boehm",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "main": "dist/dynamic-radiocard.js",
+  "keywords": [
+    "home-assistant",
+    "lovelace",
+    "custom-card",
+    "hacs",
+    "music-assistant",
+    "radio",
+    "cover-flow",
+    "media-player"
+  ],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node --check src/dynamic-radiocard.js && node scripts/build.mjs --check",
+    "deploy": "node scripts/build.mjs --deploy",
+    "release": "node scripts/set-version.mjs"
+  },
+  "dependencies": {
+    "jsdom": "^30.0.1"
+  }
+}

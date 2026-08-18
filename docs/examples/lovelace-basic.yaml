@@ -1,0 +1,5 @@
+# Minimal example - Music Assistant favorites as a cover-flow carousel.
+# Dashboard editor: "Add card" -> "Manual" -> paste.
+type: custom:dynamic-radiocard
+title: Music
+ma_token: "eyJhbGciOi..."   # long-lived token from the Music Assistant web UI
