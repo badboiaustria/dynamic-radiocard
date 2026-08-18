@@ -1,7 +1,8 @@
-# Wall tablet / kiosk example - tuned for an older tablet mounted in the
-# kitchen or living room: big covers, grid view for quick picking, no
-# animations (much smoother on weak hardware), fixed language, and the
-# player picker reduced to the rooms that matter.
+# Wall display / kiosk example - tuned for a Shelly Wall Display (the card
+# runs without problems even on the smallest models) or an older tablet
+# mounted in the kitchen or living room: big covers, grid view for quick
+# picking, no animations (much smoother on weak hardware), fixed language,
+# and the player picker reduced to the rooms that matter.
 type: custom:dynamic-radiocard
 title: Kitchen radio
 ma_token: "eyJhbGciOi..."   # long-lived token from the Music Assistant web UI

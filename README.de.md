@@ -5,7 +5,8 @@ Eine abhängigkeitsfreie Custom-Lovelace-Karte, die deine
 Radio, Podcasts, Titel, Alben und Künstler in einer Karte, bedienbar per
 Klick, Swipe oder Tastatur. Die Oberfläche ist auf Deutsch und Englisch
 verfügbar; `language: auto` folgt automatisch der Sprache deines
-HA-Profils.
+HA-Profils. Läuft problemlos auf **Shelly Wall Displays — auch den
+kleinsten Modellen** — und auf Wandtablets.
 
 Die vollständige Dokumentation ist auf Englisch:
 
@@ -32,10 +33,3 @@ title: Musik
 ma_token: "eyJhbGciOi..."
 language: auto   # oder explizit "de"
 ```
-
-## Umstieg von `ha-radio-card` 2.x
-
-In den Dashboards `type: custom:ha-radio-card` durch
-`type: custom:dynamic-radiocard` ersetzen und die Ressource auf
-`/local/dynamic-radiocard.js` zeigen lassen. Gespeicherte Einstellungen
-(Player, Kategorie, Filter) werden automatisch übernommen.

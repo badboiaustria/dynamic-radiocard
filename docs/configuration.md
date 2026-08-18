@@ -68,7 +68,7 @@ favorites_only:
   artist: false
 
 provider_names:
-  plex--36fRmfSE: Plex Audiobooks
+  plex--AbCd1234: Plex Audiobooks
   filesystem_local--xy12: Music NAS
 ```
 
@@ -159,5 +159,4 @@ The card stores in `localStorage`:
 | `dynamic-radiocard-providers-by-cat` | active provider filters per category |
 | `dynamic-radiocard-provider-registry` | cached provider registry |
 
-Values saved by the former card name (`ha-radio-card-*`) are migrated
-automatically. Clearing browser data resets these settings to the defaults.
+Clearing browser data resets these settings to the defaults.

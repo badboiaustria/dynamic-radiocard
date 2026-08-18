@@ -78,14 +78,7 @@ title: Music
 ma_token: "eyJhbGciOi..."
 ```
 
-More examples: [examples/lovelace-basic.yaml](examples/lovelace-basic.yaml)
-and [examples/lovelace-advanced.yaml](examples/lovelace-advanced.yaml).
-
-## Upgrading from `ha-radio-card` 2.x
-
-1. Install Dynamic RadioCard (HACS or manual, see above).
-2. In every dashboard using the old card, replace
-   `type: custom:ha-radio-card` with `type: custom:dynamic-radiocard`.
-3. Remove the old resource entry `/local/ha-radio-card.js` and the old file.
-4. Saved browser settings (player, category, provider filters) are migrated
-   automatically on first load.
+More examples: [examples/lovelace-basic.yaml](examples/lovelace-basic.yaml),
+[examples/lovelace-advanced.yaml](examples/lovelace-advanced.yaml) and
+[examples/lovelace-wall-tablet.yaml](examples/lovelace-wall-tablet.yaml)
+(wall display / kiosk — including Shelly Wall Displays).

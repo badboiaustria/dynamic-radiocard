@@ -6,54 +6,27 @@ All notable changes to this card. Format loosely follows
 
 ## [3.0.0] — 2026-08-18
 
-First public release under the new name **Dynamic RadioCard**.
+First public release.
 
-### Breaking changes
-
-- Card type renamed: `custom:ha-radio-card` → `custom:dynamic-radiocard`;
-  file renamed to `dynamic-radiocard.js`. Update your dashboard resource and
-  card configs (see the
-  [upgrade notes](README.md#upgrading-from-ha-radio-card-2x)).
-- Default title is now `Dynamic RadioCard` (was `Simple Best Media Card`).
-- `hide_players` no longer defaults to `"_|unnamed"` — by default no players
-  are hidden. Configure the regex explicitly if you need it.
-
-### Added
-
+- 3D cover-flow carousel for the Music Assistant library: **Radio, Podcasts,
+  Tracks, Albums, Artists**, controlled by click, swipe or keyboard.
+- **Provider filter** per category with filter panel, badge and localStorage
+  persistence; per-provider parallel library queries so no provider is lost
+  behind a global result limit.
+- **Grid view** (`grid_mode`, `grid_max`), album sorting (`album_sort`),
+  cover scaling (`image_scale`), transport bar with stop, track skip and
+  volume.
+- Automatic **player discovery** (entity registry, state-attribute scan and
+  MA WebSocket combined), player picker with `hide_players` regex.
+- Direct **WebSocket connection** to Music Assistant with long-lived token
+  auth (`ma_token`, `ma_port`), ingress support for HTTPS/Nabu Casa/remote
+  access, and a `browse_media` fallback without a token.
 - **Internationalization**: English (default) and German built in, new
   `language` option (`auto` | `en` | `de`); `auto` follows the HA user
   profile. All UI strings, tooltips, empty states and the header clock/date
   are localized. Adding further languages only requires a new block in
   `TRANSLATIONS`.
-- Automatic one-time migration of saved browser settings (player, category,
-  provider filters) from the former `ha-radio-card-*` storage keys.
+- Runs without problems on Shelly Wall Displays — even the smallest models;
+  `smooth_animation: false` for the weakest hardware.
 
-### Fixed
-
-- The `get_library` service and `browse_media` fallback paths crashed on an
-  undefined variable (`isUnfiltered`) and silently fell through inside their
-  try/catch blocks. Both fallbacks work again.
-
-### Changed
-
-- All user-facing defaults are now installation-neutral; nothing specific to
-  the author's setup remains in the code.
-- Console log prefix is now `[dynamic-radiocard]`.
-
-## [2.2.5] — 2026-07-18
-
-Last release under the former name `ha-radio-card` (not published).
-
-- Direct WebSocket connection to Music Assistant (ingress/direct host) with
-  long-lived token auth (`ma_token`, `ma_port`).
-- Provider registry and per-category provider filter with filter panel,
-  badge and localStorage persistence.
-- Per-provider parallel library queries; grid view (`grid_mode`,
-  `grid_max`); options `image_scale`, `album_sort`, `hide_players`,
-  `provider_names`, `playback_controls`, `smooth_animation`,
-  `favorites_only`, `debug`; transport bar with stop, track skip and volume.
-
-## [1.x] — 2026-04/05
-
-Initial versions: 3D cover-flow carousel for Music Assistant radio
-favorites, five categories, swipe/keyboard control, player picker, clock.
+Versions 1.x–2.x were private, unpublished predecessors of this card.

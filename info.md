@@ -3,7 +3,8 @@
 A 3D cover-flow media browser for **Music Assistant**: radio, podcasts,
 tracks, albums and artists in a single Lovelace card — with provider filter,
 grid view, player picker, volume and transport controls. English and German
-UI built in.
+UI built in. Runs without problems on Shelly Wall Displays — even the
+smallest models.
 
 **Requirements**
 

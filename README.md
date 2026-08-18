@@ -37,6 +37,9 @@ albums and artists in a single card, controlled by click, swipe or keyboard.
   category as a scrollable grid.
 - Transport bar: play/pause, stop, previous/next track, volume up/down.
 
+![Grid view](docs/images/grid.png)
+*Grid view: every item of the category at a glance.*
+
 **Player handling**
 
 - The active **Music Assistant player** is shown on the right, with a green
@@ -54,6 +57,8 @@ albums and artists in a single card, controlled by click, swipe or keyboard.
 - Clock with date and a now-playing line in the header.
 - Cover size adjustable (`image_scale`), animations can be disabled for older
   wall tablets (`smooth_animation: false`).
+- Wall-display friendly: runs without problems on **Shelly Wall Displays —
+  even the smallest models** — as well as on wall-mounted tablets.
 - **English and German** built in. `language: auto` (default) follows the HA
   user profile; adding another language is a small pull request — see
   [docs/development.md](docs/development.md).
@@ -120,10 +125,59 @@ Every option is optional. Full reference with examples:
 | `smooth_animation` | bool | `true` | `false` disables carousel easing |
 | `debug` | bool | `false` | Verbose logging in the browser console |
 
-Three ready-made examples in [docs/examples/](docs/examples/):
+### Example configurations
+
+**1 — Minimal.** Music Assistant favorites as a cover-flow carousel; that is
+all it takes:
+
+```yaml
+type: custom:dynamic-radiocard
+title: Music
+ma_token: "eyJhbGciOi..."
+```
+
+**2 — Living-room media browser.** Whole track/album library instead of
+favorites, grid view on center click, custom provider names:
+
+```yaml
+type: custom:dynamic-radiocard
+title: Living room music
+ma_token: "eyJhbGciOi..."
+favorites_only:
+  radio: true
+  podcast: true
+  track: false      # whole library for tracks …
+  album: false      # … and albums
+  artist: false
+album_sort: newest
+grid_mode: true
+image_scale: 1.2
+provider_names:
+  plex--AbCd1234: Plex Audiobooks
+```
+
+**3 — Wall display / kiosk.** Tuned for a Shelly Wall Display or an older
+wall tablet — the card runs without problems even on the smallest Shelly
+models. Big covers, grid view, no animations, fixed language, reduced player
+picker:
+
+```yaml
+type: custom:dynamic-radiocard
+title: Kitchen radio
+ma_token: "eyJhbGciOi..."
+language: en            # fixed language on a shared display
+image_scale: 1.6
+grid_mode: true
+grid_max: 30
+smooth_animation: false # instant transitions
+playback_controls: false
+hide_players: "Bedroom|Group"
+```
+
+The same three examples as ready-to-paste files:
 [minimal](docs/examples/lovelace-basic.yaml) ·
 [every option explained](docs/examples/lovelace-advanced.yaml) ·
-[wall tablet / kiosk](docs/examples/lovelace-wall-tablet.yaml)
+[wall display / kiosk](docs/examples/lovelace-wall-tablet.yaml)
 
 ### A note on the token
 
@@ -143,26 +197,6 @@ Hassio ingress via the registered HA panels (works with HTTPS, Nabu Casa and
 remote access) → an ingress session via `supervisor/api` or the REST API →
 finally a `media_player/browse_media` fallback. Playback tries
 `music_assistant.play_media` first, then `media_player.play_media`.
-
-## Upgrading from `ha-radio-card` 2.x
-
-Version 3.0.0 renamed the card. In your dashboards, change
-
-```yaml
-type: custom:ha-radio-card      # old
-```
-
-to
-
-```yaml
-type: custom:dynamic-radiocard  # new
-```
-
-and point the dashboard resource to `/local/dynamic-radiocard.js` (or install
-via HACS). Saved settings (player, category, provider filters) are migrated
-automatically. The old defaults `title: "Simple Best Media Card"` and
-`hide_players: "_|unnamed"` are gone — set them explicitly if you relied on
-them.
 
 ## Troubleshooting
 

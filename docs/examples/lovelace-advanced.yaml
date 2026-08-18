@@ -27,7 +27,7 @@ album_sort: newest      # newest | alpha
 
 # Custom display names per provider instance (ids: filter panel / debug: true)
 provider_names:
-  plex--36fRmfSE: Plex Audiobooks
+  plex--AbCd1234: Plex Audiobooks
 
 # --- Appearance ------------------------------------------------------------
 image_scale: 1.2        # 0.4 - 3.0
