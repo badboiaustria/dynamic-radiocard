@@ -1,0 +1,34 @@
+# Wall tablet / kiosk example - tuned for an older tablet mounted in the
+# kitchen or living room: big covers, grid view for quick picking, no
+# animations (much smoother on weak hardware), fixed language, and the
+# player picker reduced to the rooms that matter.
+type: custom:dynamic-radiocard
+title: Kitchen radio
+ma_token: "eyJhbGciOi..."   # long-lived token from the Music Assistant web UI
+
+# Fix the language on a shared wall tablet - `auto` would follow whichever
+# HA user the tablet happens to be logged in as.
+language: en
+
+# Radio favorites only: the family curates stations in Music Assistant,
+# the tablet just plays them.
+favorites_only:
+  radio: true
+  podcast: true
+  track: true
+  album: true
+  artist: true
+
+# Big covers and grid view: one tap on the center opens all stations as a
+# scrollable grid - faster than swiping through a long carousel.
+image_scale: 1.6
+grid_mode: true
+grid_max: 30
+
+# Hard cuts instead of easing - noticeably smoother on old tablets.
+smooth_animation: false
+
+# Radio needs no prev/next; hide bedroom players and all auto-generated
+# group players from the picker (regex on the display name).
+playback_controls: false
+hide_players: "Bedroom|Group"

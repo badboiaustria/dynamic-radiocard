@@ -23,9 +23,21 @@ The clock and date in the header follow the selected language as well.
 | `ma_token` | string | `null` | Long-lived token from the MA web UI |
 | `ma_port` | number | `8095` | MA server port (add-on default) |
 
-The card discovers the server on its own: direct host first, then Hassio
-ingress via the HA panels, then an ingress session via `supervisor/api` or
-REST — and as a last resort `media_player/browse_media`.
+The card discovers the Music Assistant server on its own, in this order:
+
+1. **Direct WebSocket** (`ws://<host>:<ma_port>/ws`) — the host is read from
+   the MA integration's config entry in HA, or sniffed from the library's
+   cover image URLs once known.
+2. **Hassio ingress** via the registered HA panels — this is why the card
+   also works over HTTPS, Nabu Casa and remote access, where a plain
+   `ws://host:8095` would be blocked as mixed content.
+3. An ingress session via `supervisor/api` or the REST API.
+4. Fallback: `media_player/browse_media` on the first MA entity found — the
+   card stays usable, but without provider filters and library counts.
+
+Paths 1–3 need the `ma_token`; without a token only the fallback works.
+`ma_port` only matters for the direct connection (path 1) and stays at the
+add-on default `8095` for almost everyone.
 
 ### Security note on the token
 
@@ -70,9 +82,9 @@ filter panel the card queries up to **500** items per provider.
 
 | Option | Type | Default | Description |
 |---|---|---|---|
-| `image_scale` | number | `1.0` | Cover scaling, valid range 0.4 – 3.0 |
+| `image_scale` | number | `1.0` | Cover scaling. Values outside 0.4 – 3.0 are clamped to that range |
 | `grid_mode` | bool | `false` | Center click opens the grid view instead of play |
-| `grid_max` | number | `70` | Maximum number of tiles in the grid |
+| `grid_max` | number | `70` | Maximum number of tiles in the grid (minimum 1) |
 | `smooth_animation` | bool | `true` | `false` disables transitions — noticeably smoother on old tablets |
 
 ## Players
@@ -82,12 +94,44 @@ filter panel the card queries up to **500** items per provider.
 | `hide_players` | regex | `null` | Players whose **display name** matches are hidden from the picker |
 | `playback_controls` | bool | `true` | Show prev/next buttons; hidden automatically for radio |
 
-`hide_players` is a regular expression, not a glob:
+### Where the players come from
+
+The card builds its player list itself — there is no `entities:` option to
+maintain. On every load it merges three sources:
+
+1. **HA entity registry** — all `media_player.*` entities whose integration
+   (platform) is `music_assistant`. This is the normal case and finds every
+   player that the Music Assistant integration created in Home Assistant.
+2. **State attribute scan** — every `media_player.*` entity whose attributes
+   point at Music Assistant (`mass_player_id`, `app_id: music_assistant`,
+   `app_name: Music Assistant`, or a `source` containing "music assistant").
+   This catches players controlled by MA but registered through another
+   platform, e.g. cast groups.
+3. **Music Assistant WebSocket** — `players/all` from the MA server itself,
+   when the direct connection is available (needs `ma_token`).
+
+The union of the three is deduplicated, keeping the order above. Display name
+and availability always come from the HA state of the entity
+(`friendly_name`). If the list ends up empty — typical right after a host
+reboot while MA is still starting — the card retries automatically with
+increasing delays (3 s → 5 s → 8 s → 12 s → 16 s).
+
+Only after this merge is `hide_players` applied, so a hidden player is never
+"missing" for any other reason than the regex.
+
+### `hide_players` in detail
+
+The value is a JavaScript regular expression (not a glob), matched
+**case-insensitively** against the player's display name — the
+`friendly_name` of the `media_player` entity, not its entity id. An invalid
+pattern logs a warning to the console and hides nothing; an empty string is
+treated like `null` (nothing hidden).
 
 ```yaml
-hide_players: "unnamed"          # anything containing "unnamed"
+hide_players: "unnamed"          # anything containing "unnamed" (any case)
 hide_players: "^(Kitchen|Bath)$" # exactly these two
 hide_players: "Group"            # anything containing "Group"
+hide_players: "_|unnamed"        # the old 2.x default: underscore or "unnamed"
 ```
 
 ## Controls

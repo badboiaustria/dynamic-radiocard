@@ -41,6 +41,10 @@ albums and artists in a single card, controlled by click, swipe or keyboard.
 
 - The active **Music Assistant player** is shown on the right, with a green
   dot while something is playing; clicking it opens a player picker.
+- Players are **discovered automatically** — from the HA entity registry, a
+  state-attribute scan and the MA server itself; there is no entity list to
+  maintain. Details:
+  [docs/configuration.md](docs/configuration.md#where-the-players-come-from).
 - Unwanted players can be hidden with a regex (`hide_players`).
 - Last used player, category and filters are remembered in the browser
   (localStorage) and restored on the next load.
@@ -116,7 +120,10 @@ Every option is optional. Full reference with examples:
 | `smooth_animation` | bool | `true` | `false` disables carousel easing |
 | `debug` | bool | `false` | Verbose logging in the browser console |
 
-Ready-made examples: [docs/examples/](docs/examples/)
+Three ready-made examples in [docs/examples/](docs/examples/):
+[minimal](docs/examples/lovelace-basic.yaml) ·
+[every option explained](docs/examples/lovelace-advanced.yaml) ·
+[wall tablet / kiosk](docs/examples/lovelace-wall-tablet.yaml)
 
 ### A note on the token
 
