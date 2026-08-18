@@ -28,6 +28,12 @@ First public release under the new name **Dynamic RadioCard**.
 - Automatic one-time migration of saved browser settings (player, category,
   provider filters) from the former `ha-radio-card-*` storage keys.
 
+### Fixed
+
+- The `get_library` service and `browse_media` fallback paths crashed on an
+  undefined variable (`isUnfiltered`) and silently fell through inside their
+  try/catch blocks. Both fallbacks work again.
+
 ### Changed
 
 - All user-facing defaults are now installation-neutral; nothing specific to

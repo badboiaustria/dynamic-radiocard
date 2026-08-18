@@ -1704,6 +1704,14 @@ class DynamicRadioCard extends HTMLElement {
     const log = (...a) => debug && console.log("[dynamic-radiocard]", "[" + cat.key + "]", ...a);
 
     await this._discoverMaPlayers(log);  // singleton - safe to always await
+    // Whether the current provider filter is a no-op for this category.
+    // Fallback strategies below may only treat the loaded set as the "full"
+    // cache when it is genuinely unfiltered. (Fixes a long-standing bug where
+    // isUnfiltered was referenced but never defined, silently killing the
+    // service/browse_media fallbacks inside their try/catch blocks.)
+    const activeSet = this._activeByCategory[cat.key];
+    const provList = this._providersByCategory[cat.key] || [];
+    const isUnfiltered = !activeSet || !provList.length || activeSet.size === provList.length;
 
     // Strategy 0: MA-native WebSocket via Hassio Ingress (full data, supports filters)
     const maClient = this._getMaClient();
