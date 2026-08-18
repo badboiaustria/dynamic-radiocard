@@ -4,6 +4,16 @@ All notable changes to this card. Format loosely follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), versioning follows
 [Semantic Versioning](https://semver.org/).
 
+## [3.0.1] — 2026-08-18
+
+Documentation release — no functional changes.
+
+- Real screenshots in the README (cover flow and grid view).
+- Three inline example configurations (minimal, living room, wall
+  display/kiosk).
+- Explicit note that the card runs without problems on Shelly Wall
+  Displays, even the smallest models.
+
 ## [3.0.0] — 2026-08-18
 
 First public release.

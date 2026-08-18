@@ -1,6 +1,6 @@
 {
   "name": "dynamic-radiocard",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Dynamic RadioCard - a 3D cover-flow media browser card for Home Assistant + Music Assistant (radio, podcasts, tracks, albums, artists).",
   "author": "Michael Boehm",
   "license": "MIT",

@@ -4,7 +4,7 @@
  * License: MIT
  */
 
-const CARD_VERSION = "3.0.0";
+const CARD_VERSION = "3.0.1";
 const STORAGE_PREFIX = "dynamic-radiocard-";
 const STORAGE_KEY_PLAYER = STORAGE_PREFIX + "selected-player";
 const STORAGE_KEY_CATEGORY = STORAGE_PREFIX + "category";
